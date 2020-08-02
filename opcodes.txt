@@ -1,0 +1,68 @@
+. 00   noop
+. 22   x <- y ^ z
+24   x <- y - z
+c4   x <- y - z, carry
+26   x <- y & z
+2a   x <- y | z
+2c   x <- y + z
+cc   x <- y + z, carry
+
+32   x <- y ^ z, imm
+34   x <- y - z, imm
+36   x <- y & z, imm
+3a   x <- y | z, imm
+3c   x <- y + z, imm
+
+
+b2   mem_b[y + z] <- x
+b4   mem_b[y + z] <- x, imm
+b6   x <- mem_bu[y + z]
+b8   x <- mem_bu[y + z], imm
+ba   x <- mem_bs[y + z]
+bc   x <- mem_bs[y + z], imm
+
+42   mem_w[y + z] <- x          
+44   mem_w[y + z] <- x, imm
+46   x <- mem_w[y + z]
+48   x <- mem_w[y + z], imm
+
+. 4a   mem_t[y + z] <- x
+4c   mem_t[y + z] <- x, imm
+. 4e   x <- mem_t[y + z]
+84   x <- mem_t[y + z], imm
+
+
+
+
+. e0   x <- status
+e2   x <- cause
+e4   x <- exc_addr
+e6   x <- eret
+e8   x <- eret, mode <- !mode 
+ea   x <- y + z, mode <- !mode
+ec   x <- y + z, imm, mode <- !mode
+
+. f0   mode <- 1
+f2   ptb <- y + z
+. f4   timer <- y + z, imm
+f6   isr <- y + z
+. f8   status <- y + z
+. fa   mmu_t[y + z] <- x
+fc   mmu_d[y + z] <- x
+
+
+
+. 20   x <- y + z if zero
+. 30   x <- y + z if zero, imm
+40   x <- y + z if not zero
+50   x <- y + z if not zero, imm
+60   x <- y + z if neg
+70   x <- y + z if neg, imm
+80   x <- y + z if pos
+90   x <- y + z if pos, imm
+a0   x <- y + z if carry
+b0   x <- y + z if carry, imm
+c0   x <- y + z if overflow
+d0   x <- y + z if overflow, imm
+
+

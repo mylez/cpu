@@ -1,0 +1,43 @@
+File: isa-2.txt
+
+Author: Miles
+
+Date: June 17, 2019
+
+Description:
+
+
+Instruction Format:
+
+    Instructions are either 16 or 32 bits, depending on whether the instruction
+requires an immediate value. The first 16 bits consists of an 8-bit opcode
+which defines the function of the instruction. Following it are two register
+arguments.
+
+Register Mode:
+
+    If the mode value (mod) of a register argument is 0, then it is a
+user-level general purpose register (like fp, sp, pc, etc). These registers can
+be accesed in any mode (user or kernel mode).
+    If the mode value of a register argument is 1, then it is a kernel-level
+register (vtable base, status, interrupt handler, etc). These registers can
+only be read or written to in kernel mode.
+
+Microcode / Control Store:
+
+    The 8-bit opcode can be used to form an address for a ROM based control
+store. The initial address in the control store may be 0x00CC, where CC is the
+opcode. The value stored in this ROM address would be all control lines to the
+various components and buses in the CPU.
+    The sequences of control lines stored in this ROM would perform the FETCH,
+DECODE, and other stages of the instruction.
+    In addition to storing control lines, the ROM can point to its own next
+address, so that the control lines can be presented in sequence.
+
+word 0:
+  opcode  mod   rx  mod   ry
+oooooooo    0  xxx    0  yyy
+
+word 1 (optional):
+           imm16
+iiiiiiiiiiiiiiii

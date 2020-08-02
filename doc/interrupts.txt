@@ -1,0 +1,36 @@
+File: interrupts.txt
+
+Author: Miles
+
+Date: June 29, 2019
+
+Description: A description of the different kinds of interrupts.
+
+Software Interrupt:
+    - Synchronous (they are like function calls)
+    - Why: User space requires some task of the kernel, and it accesses this
+    feature through a dedicated type of instruction that initiates the software
+    interrupt.
+    - When: Initiated as an actual instruction via microcode
+
+Hardware Interrupt:
+    - Asynchronous
+    - A Hardware Interrupt: External device such as keyboard.
+    - Why: The CPU needs to interact with external systems.
+    - When: Checked for after the execution of an instruction
+    - How: A hardware interrupt is initiated when an external hardware device
+    asynchronously sets an IRQ line. The IRQ lines are prioritized
+
+Trap:
+    - Synchronous
+    - They happen as the result of an instruction being executed, or a timer
+    running out (decrementing to zero).
+    - Why: Virtual memory system needs to inform kernel of Page Faults (for
+    example) before successfully completing a load/store operation. 
+    Preemptive Multitasking requires the ability for the kernel to regain
+    control of the CPU after a predefined amount of time (after the preemption
+    timer register has been decremented all the way to zero).
+    - When: Checked for after the execution of an instruction. The control
+    unit / microcode can contain information to immediatley halt execution of
+    an instruction and save the value of the PC to a Interrupt Address
+    register.

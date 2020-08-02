@@ -1,0 +1,43 @@
+
+File: isa-3.txt
+
+Author: Miles
+
+Date: July 1, 2019
+
+Description: An extremely brief notepad containing some key assembly language
+instruction formats and addressing modes
+
+X <- f(Y, Z)
+
+word 1:
+ccccccc xxx yyy zzz
+
+optional word 2:
+iiiiiiiiiiiiiiii
+
+                        
+add rx, ry, rz          
+add rx, ry, imm16      
+
+mov rd, imm16         
+
+cmp rd, imm16        
+cmp rd, rs          
+                   
+                  
+
+        
+ld  rx, [ry + rz]
+st  rx, [ry + imm16]
+
+ldb  rx, [ry + rz]
+stb  rx, [ry + imm16]
+
+;; Jump type instructions
+
+jmp rs                  ;; add pc, rs, r0
+jmp imm16               ;; add pc, r0, imm16
+                        ;; also jeq, jne, jlt, jgt, etc...
+
+

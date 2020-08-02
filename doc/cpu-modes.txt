@@ -1,0 +1,84 @@
+File: cpu-modes.txt
+
+Author: Miles
+
+Date: June 19, 2019
+
+Description: This file describes the two different modes of the CPU.
+
+    The first mode is KERN, where priveleged operations are allowed to execute.
+These instructions are able set up the environment for a process, including
+the program status, virtual table base, memory segment, preemption timer,
+etc. Instructions in KERN mode can interact with IO (UART interface, etc)
+through memory mapping.
+
+    The second mode is USER, where the unpriveleged process runs. These
+processes are set up in a "virtualized environment" through the use of
+a virtual address space (virtual addresses are translated into phsyical
+addresses through table lookup, the kernel manages the table). Multiple
+processes are interleaved by the use of the timer register, which triggers an
+interrupt when it counts down to zero and returns control to the
+kernel / scheduler.
+
+Processor Modes:
+
+KERN
+    - set/read status register
+        - overFlow bit
+        - Cary bit
+        - Zero bi
+        - Negative bit
+        - Mode bit (user or kernel)
+        - Vmem bit (virtual memory on or off)
+        - Interrupts enabled bit(s) (potentially a mask for levels)
+            - NOTE: interrupts may be disabled in KERN and enabled in USER
+            as a rule
+
+        - ex. status word format:
+           15                 0
+            000i 000v 000m nzcf
+
+    - set/read interrupt handler register
+        - NOTE: this can technically be hardwired value
+        - the interrupt handler (or handlers) is a pointer to the address in
+        RAM where a program is stored to handle any of the interrupts.
+
+    - set/read interrupt cause registers
+        - the interrupt vector contains information on the type of interrupt
+        encountered.
+
+    - set/read interrupt return address register
+        - stores the address where the interrupt occurred
+        - stores the value in PC at the time of the interrupt
+
+    - set/read interrupt virtual address register
+        - if the interrupt was the result of a bad virtual address, this
+        register stores that bad virtual address
+
+    - set/read virtual table base register
+        - the virtual table base points to the beginning of the current USER
+        processes page table in cache or RAM.
+
+    - set/read memory segment register
+        - the memory segment register forms the top 4 (or 8) bits of a 20
+        (or 24) bit physical address. This way, each process sees a 64Kbyte
+        address space but there is actually more memory (1Mbyte to 16Mbytes)
+        available to the entire system.
+
+    - set/read timer register
+        - the timer register is used to return control of the CPU from a user
+        process to the kernel / scheduler after a predefined amount of time.
+
+When in KERN mode:
+    - interrupts are disabled (not checked for)
+    - priveleged instructions may run in KERN mode
+    - timer register is NOT decremented
+
+USER
+    - set/read general purpose registers
+
+When in USER mode:
+    - interrupts are enabled (check for interrupts before fetching)
+    - priveleged instructions may NOT run in USER mode
+    - timer register is decremented every instruction
+

@@ -1,0 +1,67 @@
+File: isa-1-risc-style.txt
+
+Author: Miles
+
+Date: June 17, 2019
+
+Note: Probably not going to use this instruction format, but may use these ALU
+function bits.
+
+Description:
+    This file contains example 16-bit "RISC-style" instruction words. The KERN
+type instructions havent taken much form currently. The drawback of this
+design is the limited amount of bits for more expressive instructions (more
+alu functions or memory addressing modes) and the immediate values are
+extremely limited (to 5, 8, or 11 bits).
+
+    The benefit of this design is that there are only five instruction formats,
+which seems like it should require less hardware/clock cycles to decode. Also,
+each instruction is 16 bits wide which would require only a single two-byte
+memory read to fetch the instruction.
+
+
+    The bits corresponding to ALU operations in terms of X and Y bus.
++------+--------------+
+| FUNC | OPERATION    |
++------+--------------+
+| 000  |  Y           |
+| 001  |  X + Y       |
+| 010  |  X - Y       |
+| 011  |  X | Y       |
+| 100  |  X & Y       |
+| 101  |  X ^ Y       |
+| 110  |  ~Y          |
+| 111  |  shift(X, Y) |
++------+--------------+
+
+MATH
+00  func  rx  ry imm4
+00  ffff xxx yyy iiii
+
+# currently the imm5 bits not used, too 
+# little bits to choose between y, imm5
+#
+# rx = func(rx, ry)
+
+
+MEM:
+01 stor byt  rx  ry   OFF6
+01    x   x xxx xxx xxxxxx
+
+# rx = [ry + off6]
+
+
+BRCH
+10 cond       off11
+10  xxx xxxxxxxxxxx
+
+# IF cond THEN pc += off11
+
+
+KERN
+11 func       imm11
+11  xxx xxxxxxxxxxx
+
+# perform kernal task func with data imm11
+
+

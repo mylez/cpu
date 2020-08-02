@@ -1,0 +1,116 @@
+;
+;           Microcode State ROM Encodings
+;
+;
+;-------------------------------------------------------------------
+;       cond==trap  <==>  cond & (cond != int)
+;
+;        fetch   cond    mode       mca
+;           0       0       0       next
+;           0       1       0       1f0 | cause_hi_4
+;           1       0       0       inst
+;           1       1       0       1f0 | cause_hi_4
+;
+;           0       0       1       next
+;           0       1       1       1ff
+;           1       0       1       inst
+;           1       1       1       1ff
+;
+;  000 -> 1ff -> 011 -> 025 -> 105 -> 1ff
+;
+;-------------------------------------------------------------------
+000                 ; 00: noop
+    0000 00040000   ; ld_cause
+                    ;
+                    ; if trap & trap!=int_vec:
+                    ;   goto trap_vector
+                    ; else
+                    ;   goto user_fetch
+
+
+;-------------------------------------------------------------------
+010                 ; 20: x <- y + z if zero
+    8381 40000000   ; cond(zero), cond_inv, next(107)
+107                 ;
+    0000 04e00002   ; reg_load, d_bus(alu), alu_sel_src(+)
+
+;     
+;-------------------------------------------------------------------
+018                 ; 30: x <- y + z if zero, imm
+    0800 80041050   ; mmio_load, ld_imm16, inc_pc, ld_cause, cond(trap),
+                    ; next(010)
+
+
+;-------------------------------------------------------------------
+011                 ; 22: x <- y ^ z
+    0000 00f00002   ; reg_load, d_bus(alu), ld_status
+
+
+;-------------------------------------------------------------------
+025                 ; 4a: mem_t[y + z] <- x
+    8283 04044260   ; mmio_load, mmio_store, cond(trap & !int_vec),
+                    ; mmu_src(a_bus), ld_cause, ld_eret, next(105),
+                    ; alu_sel_src(+)
+105
+    0000 04c00220   ; mmio_store, mmu_src(a_bus), cond(always), d_bus(reg_x),
+                    ; alu_sel_src(+)
+
+;-------------------------------------------------------------------
+026                 ; 4c: x <- mem_t[y + z]
+    8303 04044240   ; mmio_load, cond(trap & !int_vec),
+                    ; mmu_src(a_bus), ld_cause, ld_eret, next(106),
+                    ; alu_sel_src(+)
+106
+    0000 04000242   ; reg_load, mmio_load, mmu_src(a_bus), a_bus(alu),
+                    ; d_bus(mmio), alu_sel_src(+)
+
+
+
+;-------------------------------------------------------------------
+070                 ; e0: x <- status
+    820b 80040000   ; ld_cause, kern_only, cond(!trap), next(104)
+104                 ;
+    0000 00800002   ; reg_load, d_bus(status)
+
+;-------------------------------------------------------------------
+078                 ; f0: mode <- !mode 800b 80044000   ; ld_cause, ld_eret, kern_only, cond(!trap), next(100) 100
+    0004 00000000   ; toggle_mode, cond(always)
+
+;-------------------------------------------------------------------
+07a                 ; f4: timer <- y + z, imm
+    808b 80041050   ; mmio_load, ld_imm16, inc_pc, ld_cause, kern_only, 
+                    ; cond(trap), next(101)
+101                 ;
+    0000 04e10000   ; d_bus(alu), alu_sel_src, ld_timer
+
+;-------------------------------------------------------------------
+07c                 ; f8: status <- y + z
+    818b 80044000   ; kern_only, ld_eret, cond(trap), next(103), ld_cause
+103                 ;
+    0000 04f80000   ; d_bus(alu), alu_sel_src, ld_status, status_src
+
+;-------------------------------------------------------------------
+07d                 ; fa: mmu_t[y + z] <- x
+    840b 80044000   ; ld_cause, ld_eret, kern_only, cond(!trap), next(108)
+108                 ;
+    0000 00000000   ; TODO -   KEEP  WORKING  ON  THIS
+
+;-------------------------------------------------------------------
+07e                 ; fc: mmu_d[y + z] <- x
+    848b 80044000   ; ld_cause, ld_eret, kern_only, cond(!trap), next(109)
+109                 ;
+    0000 00000000   ; TODO -   KEEP  WORKING  ON  THIS
+
+;-------------------------------------------------------------------
+1f0                 ; fetch, user
+    0003 20047850   ; mmio_load, ld_inst, ld_imm16, inc_pc, ld_cause, fetch,
+                    ; cond(trap/int), ld_exc_addr, ld_eret
+
+;-------------------------------------------------------------------
+1fc                 ; page fault
+    0000 00000000   ;
+
+;-------------------------------------------------------------------
+1ff                 ; fetch, kernel
+    0000 60000850   ; mmio_load, ld_inst, inc_pc, fetch, cond(!always)
+

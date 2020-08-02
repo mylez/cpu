@@ -1,0 +1,155 @@
+File: general.txt
+
+Author: Miles
+
+Date: June 30, 2019
+
+Description: Brainstorming a general overview of different systems in the CPU.
+
+
+=============================[ User Registers ]================================
+
+Description: A list of user registers and their function, as well as a list of
+busses that the register interacts with. A 'd' means that the data bus can be
+used as an input to the register. An 'x' or a 'y' means that the register can
+drive the X or Y bus respectivey. Being able to drive the X bus also implies
+that the register can be used as a destination register (i.e. loaded with the
+value of the D bus).
+
+The constant values are not really registers, but hard-wired circuits that
+contain commonly used values (two for incrementing PC <- PC + 2 and zero for
+addressing, e.g. X <- [Y + 0]).
+
+Restricting certain registers to certain busses reduces the complexity / chip
+count by at least 12 ICs (dont use line drivers for constant values etc).
+
+
++------------+---------+--------------------------------------+
+| User Reg   | Binary  | Desc.                                |
++------------+---------+--------------------------------------+
+| u0         |   000   | A constant, hard-wired value of 2    |
+| u1         |   001   | General purpose register 1           |
+| u2         |   010   | General purpose register 2           |
+| u3         |   011   | General purpose register 3           |
+| u4 - sp    |   100   | Stack pointer, for fp + sp           |
+| u5 - fp    |   101   | Frame pointer, for fp + sp           |
+| u6 - pc    |   110   | Program counter alligned to 2^1      |
+| u7 - ra    |   111   | Return Address register, all. to 2^1 |
++------------+---------+--------------------------------------+
+| Kern Reg   |         | Desc.                                |
++------------+---------+--------------------------------------+
+| ks         |         | Status                               |
+| kih        |         | Interrupt Handler                    |
+| kic        |         | Interrupt Cause                      |
+| kira       |         | Interrupt Return Address             |
+| kiva       |         | Interrupt Virtual Address            |
+| kvtb       |         | Virtual Table Base                   |
+| kmb        |         | Memory Bank                          |
+| kpt        |         | Preemption Timer                     |
++------------+---------+--------------------------------------+
+
+
+==================================[ ALU ]======================================
+
+Description:
+    The bits corresponding to ALU operations in terms of X and Y bus. The
+result of the ALU operation drives the D bus, which will feed back into the
+register unit and update the value of rX (the register that drives the X bus)
+if the UREG_LOAD control signal is asserted.
+
++------+------------+
+| FUNC | OPERATION  |
++------+------------+
+| 000  |  (todo)    |
+| 001  |  X + Y     |
+| 010  |  X - Y     |
+| 011  |  X | Y     |
+| 100  |  X & Y     |
+| 101  |  X ^ Y     |
+| 110  |  ~Y        |
+| 111  |  X << Y    |
++------+------------+
+
+    * The ALU drives the D bus with the result of the operation. If the result
+    of the ALU is being used as an address, it will instead drive the A bus.
+
+
+==============================[ Virtual Memory ]===============================
+
+
+=========================[ Exceptions / Interrupts ]===========================
+
+    Interrupts exist to pause execution of a USER mode program, switching to
+execute an Interrupt Handler (IH) in KERN mode. The interrupt is achieved by
+signalling an Interrupt Request (IRQ) on one of the the IRQ lines of the
+processor. This is useful for interfacing asynchronously with external devices
+(keyboards, serial ports, etc) as well as handling internals of the CPU
+itself (timer preemption, page fault, etc).
+    Each of the IRQ lines is prioritized using a priority encoder (eg the
+74ls148) such that the device with the highest priority will be serviced before
+a device with lower priority, even if they both assert their IRQ line within
+the same cycle.
+
+
+    TIMER_PREEMPT
+    PAGE_FAULT
+    ALU_OVERFLOW
+    EXTERNAL
+
+
+=======================[ Memory/IO & Addressing Modes ]========================
+
+rX <--> [rY + rZ/imm16]
+
+rX, rY, or rZ can all be the same register or r0 (hardwired zero value).
+
+============================[ Instruction Format ]=============================
+
+word 1:
+ccccccc xxx yyy zzz
+
+optional word 2:
+iiiiiiiiiiiiiiii
+
+
+=============================[ Kernel Registers ]==============================
+
+    0) ks: Status register (set, read)
+        - overFlow bit
+        - Zero bit
+        - Negative bit
+        - Mode bit (USER or KERN)
+        - Virtual memory bit (on or off)
+        - Interrupts enabled bit(s) (potentially a mask for levels)
+            - NOTE: possiblly disable interrupts in KERN and enable in USER as
+            a rule
+
+        - ex. status word format:
+           15                 0
+            000i 000v 000m nzcf
+
+    1) kisr: Interrupt Service Routine register (set)
+        - NOTE: this can technically be hardwired value
+        - the interrupt handler (or handlers) is a pointer to the address in
+        RAM where a program is stored to handle any of the interrupts.
+
+    2) kic: Interrupt Cause register (read)
+        - the interrupt vector contains information on the type of interrupt
+        encountered.
+
+    3) kira: Interrupt Return Address register (read)
+        - stores the address where the interrupt occurred
+        - stores the value in PC at the time of the interrupt
+
+    4) kiva: Interrupt Virtual Address register (set, read)
+        - if the interrupt was the result of a bad virtual address, this
+        register stores that bad virtual address
+
+    5) kvtb: Virtual Table Base register (set)
+        - the virtual table base points to the beginning of the current USER
+        processes page table in cache or RAM.
+
+    6) kpt: Preemption Timer register (set)
+        - the preemption timer register is used to return control of the CPU
+        from a user process to the kernel after a predefined amount of time.
+

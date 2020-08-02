@@ -1,0 +1,35 @@
+File: components.txt
+
+Author: Miles
+
+Date: June 17, 2019
+
+Description: This file contains a growing list of interesting electronic
+components. When some interesting or useful component is encountered, write
+about it here.
+
+
+74x Series Logic ICs
+-------------------------------------------------------------------------------
+74x381      - 4 bit ALU
+74x244      - octal line drivers, 3 state out
+74x153      - dual 4 input mux
+
+74x3257     - quad 2 input mux
+74x157      - quad 2 input mux
+
+74x273      - octal d flip flop
+74x374      - octal d flip flip, 3 state out
+
+74x138      - 1-of-8 decoder / demultiplexer
+
+Serial/IO Interfaces
+-------------------------------------------------------------------------------
+16550 UART  - UART Serial Interface, used with MAX233
+MAX233      - SR232 Driver
+
+Memory
+-------------------------------------------------------------------------------
+AT28C64B    - (8K x 8) Parallel EEPROM (13 address bits, 8 data bits)
+              Electrically erasable & programmable ROM
+
