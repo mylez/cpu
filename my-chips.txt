@@ -1,0 +1,44 @@
+
+                                 TOP
+
+74hc139,    dual 2-line to 4-line dec/demul,    https://www.ti.com/lit/ds/symlink/sn54hc139.pdf
+74hc157,    quad 2-to-1 multiplexers,           https://4donline.ihs.com/images/VipMasterIC/IC/RNSA/RNSAS04025/RNSAS04025-1.pdf
+74hc163,    4-bit binary counter,               https://www.ti.com/lit/ds/symlink/sn54hc163.pdf
+
+74hc164,    8-bit shift-register,               https://www.mouser.com/datasheet/2/916/nxp_74hc_hct164-1319105.pdf
+74hc165,    8-bit serial shift reg, par. load, complement outputs
+74hc174,    hex D flip-flop, comm. async clear
+
+74hc244,    octal tristate buffer, non-inverting outputs
+74hc245,    octal bus transceiver, non-inverting outp
+74hc273,    8-bit register, asynchronous clear
+
+74hc373,    octal transparent latch, 3-state
+74hc374,    octal register, 3-state
+74hc393,    dual 4-bit binary counter
+
+74hc573,    octal D-type transparent latch, 3-state
+74hc574,    octal D-type edge triggered flip-flop, 3-state
+74hc595,    8-bit shift registers, output latches, parallel outputs
+
+                                BOTTOM
+
+74hc00,     quad 2-input NAND gate
+74hc02,     quad 2-input NOR gate
+74hc04,     hex inverter gate
+
+74hc05,     hex inverter gate (open col.)
+74hc08,     quad 2-input AND gate
+74hc10,     triple 3-input NAND gate
+
+74hc14,     hex inverter gate (schmitt trig)
+74hc21,     dual 4-input AND gate
+74hc30,     single 8-input NAND gate
+
+74hc32,     quad 2-input OR gate
+74hc74,     dual D positive edge triggered flip-flip, async preset/clear
+74hc125,    quad bus buffer, neg. enable
+
+74hc126,    quad bus buffer, pos. enable
+74hc132,    quad 2-input NAND gate
+74hc138,    3-to-8 decoder/demul., address latch, inv. outputs
