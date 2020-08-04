@@ -6,6 +6,15 @@
     <tool name="Splitter">
       <a name="facing" val="west"/>
     </tool>
+    <tool name="Pin">
+      <a name="facing" val="north"/>
+    </tool>
+    <tool name="Probe">
+      <a name="facing" val="south"/>
+    </tool>
+    <tool name="Pull Resistor">
+      <a name="facing" val="north"/>
+    </tool>
   </lib>
   <lib desc="#Gates" name="1"/>
   <lib desc="#Plexers" name="2">
@@ -160,6 +169,28 @@ end TCL_Generic;
     <wire from="(870,80)" to="(870,330)"/>
     <wire from="(50,400)" to="(890,400)"/>
     <wire from="(300,60)" to="(430,60)"/>
+    <comp lib="0" loc="(210,200)" name="Pin">
+      <a name="width" val="8"/>
+      <a name="label" val="OPCODE"/>
+    </comp>
+    <comp lib="8" loc="(1026,96)" name="Text">
+      <a name="text" val="If this is high, load the top 8 bits of ROM address"/>
+    </comp>
+    <comp lib="0" loc="(230,240)" name="Clock"/>
+    <comp lib="0" loc="(850,140)" name="Splitter">
+      <a name="facing" val="west"/>
+      <a name="fanout" val="4"/>
+      <a name="incoming" val="4"/>
+      <a name="appear" val="center"/>
+    </comp>
+    <comp lib="0" loc="(760,120)" name="Splitter">
+      <a name="fanout" val="8"/>
+      <a name="incoming" val="8"/>
+      <a name="appear" val="center"/>
+    </comp>
+    <comp lib="8" loc="(441,421)" name="Text">
+      <a name="text" val="NEXT_INDEX"/>
+    </comp>
     <comp lib="0" loc="(450,70)" name="Splitter">
       <a name="facing" val="west"/>
       <a name="incoming" val="12"/>
@@ -176,56 +207,37 @@ end TCL_Generic;
       <a name="bit10" val="1"/>
       <a name="bit11" val="1"/>
     </comp>
+    <comp lib="4" loc="(250,170)" name="Register">
+      <a name="trigger" val="falling"/>
+    </comp>
     <comp lib="4" loc="(480,60)" name="ROM">
       <a name="addrWidth" val="12"/>
       <a name="contents">addr/data: 12 8
 10 20 30 40 1 11*0 10
 </a>
     </comp>
-    <comp lib="8" loc="(383,347)" name="Text">
-      <a name="text" val="LOAD_OPCODE"/>
+    <comp lib="8" loc="(168,22)" name="Text">
+      <a name="text" val="Example of State Machine (Basis of control unit)"/>
     </comp>
-    <comp lib="8" loc="(1026,96)" name="Text">
-      <a name="text" val="If this is high, load the top 8 bits of ROM address"/>
-    </comp>
-    <comp lib="0" loc="(210,200)" name="Pin">
-      <a name="width" val="8"/>
-      <a name="label" val="OPCODE"/>
-    </comp>
-    <comp lib="0" loc="(230,240)" name="Clock"/>
-    <comp lib="4" loc="(240,30)" name="Register">
-      <a name="width" val="4"/>
-      <a name="trigger" val="falling"/>
-    </comp>
-    <comp lib="0" loc="(850,140)" name="Splitter">
-      <a name="facing" val="west"/>
-      <a name="fanout" val="4"/>
-      <a name="incoming" val="4"/>
-      <a name="appear" val="center"/>
+    <comp lib="8" loc="(1058,160)" name="Text">
+      <a name="text" val="(transitions to next control state within an instruction)"/>
     </comp>
     <comp lib="8" loc="(1033,144)" name="Text">
       <a name="text" val="&lt;- The next lower 4 bits of the ROM address"/>
     </comp>
-    <comp lib="8" loc="(441,421)" name="Text">
-      <a name="text" val="NEXT_INDEX"/>
+    <comp lib="4" loc="(240,30)" name="Register">
+      <a name="width" val="4"/>
+      <a name="trigger" val="falling"/>
     </comp>
     <comp lib="8" loc="(973,110)" name="Text">
       <a name="text" val="with the value of OPCODE pins"/>
     </comp>
-    <comp lib="4" loc="(250,170)" name="Register">
-      <a name="trigger" val="falling"/>
+    <comp lib="8" loc="(383,347)" name="Text">
+      <a name="text" val="LOAD_OPCODE"/>
     </comp>
     <comp lib="8" loc="(935,81)" name="Text">
       <a name="text" val="&lt;- LOAD_OPCODE"/>
     </comp>
-    <comp lib="0" loc="(760,120)" name="Splitter">
-      <a name="fanout" val="8"/>
-      <a name="incoming" val="8"/>
-      <a name="appear" val="center"/>
-    </comp>
     <comp lib="0" loc="(220,100)" name="Clock"/>
-    <comp lib="8" loc="(1058,160)" name="Text">
-      <a name="text" val="(transitions to next control state within an instruction)"/>
-    </comp>
   </circuit>
 </project>
