@@ -1,4 +1,5 @@
-
+SST39SF010A, 128K x 8 flash 
+AT28C64, 		8k x 8 EEPROM
                                  TOP
 
 74hc139,    dual 2-line to 4-line dec/demul,    https://www.ti.com/lit/ds/symlink/sn54hc139.pdf
