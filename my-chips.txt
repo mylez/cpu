@@ -36,8 +36,7 @@ AT28C64, 		8k x 8 EEPROM
 74hc21,     dual 4-input AND gate
 74hc30,     single 8-input NAND gate
 
-74hc32,     quad 2-input OR gate
-74hc74,     dual D positive edge triggered flip-flip, async preset/clear
+74hc32,     quad 2-input OR gate 74hc74,     dual D positive edge triggered flip-flip, async preset/clear
 74hc125,    quad bus buffer, neg. enable
 
 74hc126,    quad bus buffer, pos. enable
