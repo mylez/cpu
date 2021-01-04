@@ -7426,7 +7426,6 @@ f5 1 77 f0 123*0 e
       <a name="facing" val="east"/>
       <a name="label" val="RAM"/>
     </comp>
-    <comp loc="(490,490)" name="ram_2Mx8"/>
     <comp lib="0" loc="(260,130)" name="Tunnel">
       <a name="facing" val="east"/>
       <a name="width" val="16"/>
