@@ -1,13 +1,13 @@
 
 ### Arithmetic Instructions
-    - add  rx ry rz
-    - sub  rx ry rz
-    - and  rx ry rz
-    - or   rx ry rz
-    - xor  rx ry rz
-    - sgx  rx ry
-    - shl  rx ry
-    - shr  rx ry
+    - add  rx ry rz           (rx <- ry + rz, status updated)
+    - sub  rx ry rz           (rx <- ry + rz, status updated)
+    - and  rx ry rz           (rx <- ry & rz, status updated)
+    - or   rx ry rz           (rx <- ry | rz, status updated)
+    - xor  rx ry rz           (rx <- ry ^ rz, status updated)
+    - sgx  rx ry              (rx <- sigex(ry), status updated)
+    - shl  rx ry              (rx <- shiftl(ry), status updated)
+    - shr  rx ry              (rx <- shiftr(ry), status updated)
     
 ### MMIO Instructions
     - l    rx ry rz           (vmem_data[ry + rz] <- rx) *
