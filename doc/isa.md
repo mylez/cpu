@@ -1,5 +1,9 @@
+# Instruction Set Architecture (ISA)
+##### Total: 31 instructions
+
 
 ### Arithmetic Instructions
+##### (8)
     - add  rx ry rz           (rx <- ry + rz, status updated)
     - sub  rx ry rz           (rx <- ry + rz, status updated)
     - and  rx ry rz           (rx <- ry & rz, status updated)
@@ -10,6 +14,7 @@
     - shr  rx ry              (rx <- shiftr(ry), status updated)
     
 ### MMIO Instructions
+##### (12)
     - l    rx ry rz           (vmem_data[ry + rz] <- rx) *
     - s    rx ry rz           (rx <- vmem_data[...]) *
     - lb   rx ry rz           (vmem_data[...] <- rx, byte) *
@@ -27,6 +32,7 @@
     (ie unprotected). all other MMIO instructions are protected instructions.
 
 ### Kernel / Special Instructions
+##### (11)
     - ktime   rx              kernel load timer: timer <- rx
     - kuser                   enable user mode
     - kcaus   rx              kernel read cause: rx <- cause
