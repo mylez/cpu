@@ -5,7 +5,7 @@
     - and  rx ry rz
     - or   rx ry rz
     - xor  rx ry rz
-    - sgx   rx ry
+    - sgx  rx ry
     - shl  rx ry
     - shr  rx ry
 ### MMIO Operations
