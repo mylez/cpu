@@ -34,8 +34,8 @@
     - kcont   rx              kernel read context register: rx <- context
     - krout   rx              kernel read isr register: rx <- isr
     - kbase   rx              load page table base register: ptb <- rx
-    - kptbs   rx ry rz        store page table entry, ptb[ry + rz] <- rx
-    - kptbl   rx ry rz        load page table entry, rx <- ptb[ry + rz]
+    - kptes   rx ry rz        store page table entry, ptb[ry + rz] <- rx
+    - kptel   rx ry rz        load page table entry, rx <- ptb[ry + rz]
     - statr   rx              read status register: rx <- status **
     - statl   rx              load status register: status <- rx **
     
