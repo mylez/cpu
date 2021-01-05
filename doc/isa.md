@@ -1,5 +1,5 @@
 
-=== Arithmetic Operations
+### Arithmetic Operations
 
  - add  rx ry rz
  - sub  rx ry rz
@@ -10,7 +10,7 @@
  - shl  rx ry
  - shr  rx ry
 
-=== MMIO Operations
+### MMIO Operations
  - l    rx ry rz           (vmem_data[ry + rz] <- rx)
  - s    rx ry rz           (rx <- vmem_data[...])
  - lb   rx ry rz           (vmem_data[...] <- rx, byte)
@@ -25,7 +25,7 @@
  - ksc  rx ry rz           (kmem_code[...] <- rx)
 
 
-== Kernel / Special Operations
+### Kernel / Special Operations
  - ktime   rx              kernel load timer: timer <- rx
  - kcaus   rx              kernel read cause: rx <- cause
  - keret   rx              kernel read exc. return addr: rx <- eret
