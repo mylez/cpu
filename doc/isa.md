@@ -28,6 +28,7 @@
 
 ### Kernel / Special Instructions
     - ktime   rx              kernel load timer: timer <- rx
+    - kuser                   enable user mode
     - kcaus   rx              kernel read cause: rx <- cause
     - keret   rx              kernel read exc. return addr: rx <- eret
     - kcont   rx              kernel read context register: rx <- context
