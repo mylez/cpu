@@ -1,6 +1,6 @@
 
 ### Arithmetic Operations
-
+<div style="font-family: monospace;">
  - add  rx ry rz
  - sub  rx ry rz
  - and  rx ry rz
@@ -9,7 +9,7 @@
  - sgx   rx ry
  - shl  rx ry
  - shr  rx ry
-
+</div>
 ### MMIO Operations
  - l    rx ry rz           (vmem_data[ry + rz] <- rx)
  - s    rx ry rz           (rx <- vmem_data[...])
