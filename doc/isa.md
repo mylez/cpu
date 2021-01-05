@@ -38,5 +38,5 @@
     - statr   rx              read status register: rx <- status **
     - statl   rx              load status register: status <- rx **
     
-    ** statr and statl are unprotected. All others ont he kernel / special list
+    ** statr and statl are unprotected. all others on the kernel / special list
     are protected instructions.
