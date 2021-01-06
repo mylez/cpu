@@ -36,7 +36,8 @@
     ktime   rx              kernel load timer: timer <- rx
     kuser                   enable user mode
     kcaus   rx              kernel read cause: rx <- cause
-    keret   rx              kernel read exc. return addr: rx <- eret
+    keret   rx              kernel read exception return addr: rx <- eret
+    kaddr   rx              kernel read exception virtual address: rx <- exc_addr
     kcont   rx              kernel read context register: rx <- context
     krout   rx              kernel read isr register: rx <- isr
     kbase   rx              load page table base register: ptb <- rx
