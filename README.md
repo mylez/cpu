@@ -1,5 +1,5 @@
 ### Instruction Set Architecture (ISA)
-The ISA is documented [here.(https://github.com/mylez/cpu/blob/master/doc/isa.md)
+The ISA is documented [here.](https://github.com/mylez/cpu/blob/master/doc/isa.md)
 
 ### User Registers
 There are 8 registers available to a user program. These are:
