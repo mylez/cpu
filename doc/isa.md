@@ -1,5 +1,5 @@
 # Instruction Set Architecture (ISA)
-##### Total: 32 instructions
+##### Total: 35 instructions
 
 
 ### Arithmetic Instructions
@@ -14,8 +14,9 @@
     shr  rx ry              (rx <- shiftr(ry), status updated)
     
 ### MMIO Instructions
-##### (12)
+##### (15)
     l    rx ry rz           (vmem_data[ry + rz] <- rx) *
+    li   rx imm             (rx <- imm) *
     s    rx ry rz           (rx <- vmem_data[...]) *
     lb   rx ry rz           (vmem_data[...] <- rx, byte) *
     sb   rx ry rz           (rx <- vmem_data[...], byte) *
