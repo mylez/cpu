@@ -1,5 +1,5 @@
 # Instruction Set Architecture (ISA)
-##### Total: 31 instructions
+##### Total: 32 instructions
 
 
 ### Arithmetic Instructions
@@ -32,7 +32,7 @@
     (ie unprotected). all other MMIO instructions are protected instructions.
 
 ### Kernel / Special Instructions
-##### (11)
+##### (12)
     ktime   rx              kernel load timer: timer <- rx
     kuser                   enable user mode
     kcaus   rx              kernel read cause: rx <- cause
