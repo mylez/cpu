@@ -31,7 +31,7 @@
     klc  rx ry rz           (rx <- kmem_code[...])
     ksc  rx ry rz           (kmem_code[...] <- rx)
     
-    * l, s, lb, sb, and ats are the only mmio instructions available to user programs
+    * l, s, lb, sb, li, and ats are the only mmio instructions available to user programs
     (ie unprotected). all other MMIO instructions are protected instructions.
 
 ### Kernel / Special Instructions
