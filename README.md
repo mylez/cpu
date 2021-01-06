@@ -16,7 +16,7 @@
 ### MMIO Instructions
 ##### (15)
     l    rx ry rz           (vmem_data[ry + rz] <- rx) *
-    li   rx imm             (rx <- imm) *
+    li   imm                (r7 <- imm) *
     s    rx ry rz           (rx <- vmem_data[...]) *
     lb   rx ry rz           (vmem_data[...] <- rx, byte) *
     sb   rx ry rz           (rx <- vmem_data[...], byte) *
