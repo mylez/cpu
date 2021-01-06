@@ -76,7 +76,7 @@ There are 7 registers dedicated to kernel functions and special applications. Th
     context - Contains the value of the r7 when the exception/interrupt occurred. Used in context switching. Protected.
     isr - Contains the hardwired address of the global kernel interrupt service routine.
    
-## Schematics
+## Logisim Schematics
 #### CPU Main Circuit
 ![cpu](https://raw.githubusercontent.com/mylez/cpu/master/doc/cpu.png)
 
