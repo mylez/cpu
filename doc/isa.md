@@ -19,16 +19,18 @@
     s    rx ry rz           (rx <- vmem_data[...]) *
     lb   rx ry rz           (vmem_data[...] <- rx, byte) *
     sb   rx ry rz           (rx <- vmem_data[...], byte) *
+    ats  rx ry rz           (atomic test and set, vmem, byte) *
     lc   rx ry rz           (rx <- vmem_code[...])
     sc   rx ry rz           (vmem_code[...] <- rx)
     kl   rx ry rz           (kmem_data[...] <- rx)
     ks   rx ry rz           (rx <- kmem_data[...], byte)
+    kats rx ry rz           (atomic test and set, kernel mem, byte)
     klb  rx ry rz           (rx <- kmem_data[...], byte)
     ksb  rx ry rz           (kmem_data[...] <- rx)
     klc  rx ry rz           (rx <- kmem_code[...])
     ksc  rx ry rz           (kmem_code[...] <- rx)
     
-    * l, s, lb, and sb are the only mmio instructions available to user programs
+    * l, s, lb, sb, and ats are the only mmio instructions available to user programs
     (ie unprotected). all other MMIO instructions are protected instructions.
 
 ### Kernel / Special Instructions
