@@ -41,7 +41,7 @@
     bne ry rz               branch if not equal
     bng ry rz               branch if negative
     bov ry rz               branch if overflow
-      ...  (potentially different based on implementation)
+      ...  (potentially different based on implementation) ...
     b   ry rz               branch (unconditional)
     cll imm                 call (r7 <- pc, pc <- imm, return via add, l, li, ...)
 
