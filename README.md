@@ -1,9 +1,9 @@
 ## Instruction Set Architecture (ISA)
-##### Total: 35 instructions
+##### Total: 49 instructions (49 / 128 opcodes reserved)
 
 
 ### Arithmetic Instructions
-##### (8)
+##### (16)
     add  rx ry rz           (rx <- ry + rz, status updated)
     sub  rx ry rz           (rx <- ry + rz, status updated)
     and  rx ry rz           (rx <- ry & rz, status updated)
@@ -13,6 +13,15 @@
     sgx  rx ry              (rx <- sigex(ry), status updated)
     shl  rx ry              (rx <- shiftl(ry), status updated)
     shr  rx ry              (rx <- shiftr(ry), status updated)
+                (imm value)
+    add  rx im rz           (rx <- ry + rz, status updated)
+    sub  rx im rz           (rx <- ry + rz, status updated)
+    and  rx im rz           (rx <- ry & rz, status updated)
+    or   rx im rz           (rx <- ry | rz, status updated)
+    xor  rx im rz           (rx <- ry ^ rz, status updated)
+    sgx  rx im              (rx <- sigex(ry), status updated)
+    shl  rx im              (rx <- shiftl(ry), status updated)
+    shr  rx im              (rx <- shiftr(ry), status updated)
     
 ### MMIO Instructions
 ##### (15)
@@ -37,6 +46,7 @@
     
 
 ### Control Flow Instructions
+##### (6)
     beq ry rz               branch if equal (pc <- $ry + rz)
     bne ry rz               branch if not equal
     bng ry rz               branch if negative
