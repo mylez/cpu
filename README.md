@@ -8,7 +8,6 @@
     sub  rx ry rz           (rx <- ry + rz, status updated)
     and  rx ry rz           (rx <- ry & rz, status updated)
     or   rx ry rz           (rx <- ry | rz, status updated)
-      ...  (potentially different based on implementation) ...
     xor  rx ry rz           (rx <- ry ^ rz, status updated)
     sgx  rx ry              (rx <- sigex(ry), status updated)
     shl  rx ry              (rx <- shiftl(ry), status updated)
@@ -22,7 +21,8 @@
     sgx  rx im              (rx <- sigex(ry), status updated)
     shl  rx im              (rx <- shiftl(ry), status updated)
     shr  rx im              (rx <- shiftr(ry), status updated)
-    
+     ...  (will vary based on alu implementation) ...
+
 ### MMIO Instructions
 ##### (15)
     l    rx ry rz           (vmem_data[ry + rz] <- rx) *
@@ -62,7 +62,7 @@
     b   im rz
     cll im                  function call (r7 <- pc, pc <- imm, return via add, l, li, ...etc)
     sys im                  system call via exception (r7 <- return value)
-
+      ... (will vary based on implementation) ...
 
 ### Kernel / Special Instructions
 ##### (12)
