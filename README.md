@@ -1,5 +1,5 @@
 ## Instruction Set Architecture (ISA)
-##### Total: 57 instructions (57 / 128 opcodes reserved)
+##### Total: 57 instructions (57 of 128 opcodes reserved)
 
 
 ### Arithmetic Instructions
