@@ -12,7 +12,7 @@
     sgx  rx ry              (rx <- sigex(ry), status updated)
     shl  rx ry              (rx <- shiftl(ry), status updated)
     shr  rx ry              (rx <- shiftr(ry), status updated)
-                (imm value)
+                (imm values)
     add  rx im rz           (rx <- ry + rz, status updated)
     sub  rx im rz           (rx <- ry + rz, status updated)
     and  rx im rz           (rx <- ry & rz, status updated)
