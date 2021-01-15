@@ -1,5 +1,5 @@
 ## Instruction Set Architecture (ISA)
-##### Total: 49 instructions (49 / 128 opcodes reserved)
+##### Total: 57 instructions (57 / 128 opcodes reserved)
 
 
 ### Arithmetic Instructions
@@ -46,14 +46,22 @@
     
 
 ### Control Flow Instructions
-##### (6)
+##### (14)
     beq ry rz               branch if equal (pc <- $ry + rz)
     bne ry rz               branch if not equal
     bng ry rz               branch if negative
     bov ry rz               branch if overflow
-      ...  (potentially different based on implementation) ...
+    bcy ry rz               branch if carry
     b   ry rz               branch (unconditional)
-    cll imm                 call (r7 <- pc, pc <- imm, return via add, l, li, ...)
+              (imm values)
+    beq im rz               branch if equal (r7 <- im, pc <- im + rz)
+    bne im rz               branch if not equal
+    bng im rz               branch if negative
+    bov im rz               branch if overflow
+    bcy im rz               branch if carry
+    b   im rz
+    cll im                  function call (r7 <- pc, pc <- imm, return via add, l, li, ...etc)
+    sys im                  system call via exception (r7 <- return value)
 
 
 ### Kernel / Special Instructions
@@ -71,6 +79,7 @@
     statr   rx              read status register: rx <- status **
     statl   rx              load status register: status <- rx **
     
+    
     ** statr and statl are unprotected. all others on the kernel / special list
     are protected instructions.
 
@@ -86,7 +95,7 @@ There are 8 registers available to a user program. These are:
     r4 - Base pointer.
     r5 - Stack pointer.
     r6 - Program counter.
-    r7 - Immediate value / return address.
+    r7 - Special register (imm. value / int. return value / return address)
 
 ### Kernel / Special Registers
 There are 7 registers dedicated to kernel functions and special applications. These are:
