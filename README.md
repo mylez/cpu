@@ -8,6 +8,7 @@
     sub  rx ry rz           (rx <- ry + rz, status updated)
     and  rx ry rz           (rx <- ry & rz, status updated)
     or   rx ry rz           (rx <- ry | rz, status updated)
+      ...  (potentially different based on implementation) ...
     xor  rx ry rz           (rx <- ry ^ rz, status updated)
     sgx  rx ry              (rx <- sigex(ry), status updated)
     shl  rx ry              (rx <- shiftl(ry), status updated)
@@ -33,6 +34,17 @@
     
     * l, s, lb, sb, li, and ats are the only mmio instructions available to user programs
     (ie unprotected). all other MMIO instructions are protected instructions.
+    
+
+### Control Flow Instructions
+    beq ry rz               branch if equal (pc <- $ry + rz)
+    bne ry rz               branch if not equal
+    bng ry rz               branch if negative
+    bov ry rz               branch if overflow
+      ...  (potentially different based on implementation)
+    b   ry rz               branch (unconditional)
+    cll imm                 call (r7 <- pc, pc <- imm, return via add, l, li, ...)
+
 
 ### Kernel / Special Instructions
 ##### (12)
@@ -52,6 +64,7 @@
     ** statr and statl are unprotected. all others on the kernel / special list
     are protected instructions.
 
+
 ## Register Layout
 ### User Registers
 There are 8 registers available to a user program. These are:
@@ -63,12 +76,12 @@ There are 8 registers available to a user program. These are:
     r4 - Base pointer.
     r5 - Stack pointer.
     r6 - Program counter.
-    r7 - Immediate value register.
+    r7 - Immediate value / return address.
 
 ### Kernel / Special Registers
 There are 7 registers dedicated to kernel functions and special applications. These are:
 
-    status -  Contains the result of the last ALU operation, used for conditional 
+    status -  Contains the result of the last ALU operation as NZVF used for conditional 
               branching. User-accessible.
     timer -   Preemption timer. Decremented while in user mode. Once it reaches zero,
               it signals a preemption exception. Protected.
