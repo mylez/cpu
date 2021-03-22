@@ -3,7 +3,7 @@
 # 16-Bit Multiprogram Computer
 - Supports kernel and user modes.
 - Supports interrupts and exceptions for segmentation violations, timeouts, IO etc (via kernel routine).
-- Supports user memory protection through virtual pages (64KB address space per process).
+- Supports user memory protection through virtual pages (64KB data / 128KB code address space per process).
 - Supports preemptive multiprogramming via a hardware timer.
 
 ## Instruction Set Architecture (ISA)
@@ -104,6 +104,31 @@ There are 8 registers available to a user program. These are:
     r5 - Stack pointer.
     r6 - Program counter.
     r7 - Special register (imm. value / int. return value / return address)
+    
+### Memory Segmentation
+
+Memory is split across both user/kernel domains as well as data/code domains. The
+kernel segments are always addressed using physical addresses, while the user segments
+are always addressed using virtual address translation via the MMU. In kernel mode,
+the CPU will execute code from the kernel code segment. In user mode, it will execute
+from the data segment.
+
+In addition to virtual pages for user processes, processes running in kernel mode may
+access the kernel RAM / ROM using physical addresses - ie there is only one kernel
+address space. The CPU will begin to execute from this kernel address space on startup,
+or when handling an exception.
+
+A benefit of this approach is that it allows for data and code to occupy separate
+address spaces. Data is byte-addressed. Code is 16 bit word-addressed (since all
+instructions are alligned 2-byte boundaries). This provides a larger address space
+(192KB in total).
+
+A drawback of this approach is that kernel processes can not share memory with
+user processes, and extra care is required in kernel mode to use the appropriate 
+instruction the segment you wish to read to or write from.
+
+![mmio layout](https://raw.githubusercontent.com/mylez/cpu/master/doc/mmio-layout.jpeg)
+
 
 ### Kernel / Special Registers
 There are 7 registers dedicated to kernel functions and special applications. These are:
