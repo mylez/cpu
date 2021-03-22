@@ -1,9 +1,9 @@
 #### Miles Smith
 
-# 16-Bit Multiprogramming Computer
-- Operates in kernel and user modes.
+# 16-Bit Multiprogram Computer
+- Support for kernel and user modes.
 - Support for exceptions.
-- Support for user memory protection through virtual pages.
+- Support for user memory protection through virtual pages (64KB address space per process).
 - Support for preemptive multiprogramming via a hardware timer.
 
 ## Instruction Set Architecture (ISA)
