@@ -1,3 +1,12 @@
+# 16-Bit Multiprogramming Computer
+
+### Miles Smith
+
+- Operates in kernel and user modes.
+- Support for exceptions.
+- Support for user memory protection through virtual pages.
+- Support for preemptive multiprogramming via a hardware timer.
+
 ## Instruction Set Architecture (ISA)
 ##### Total: 57 instructions (57 of 128 opcodes reserved)
 
