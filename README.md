@@ -1,10 +1,10 @@
 #### Miles Smith
 
 # 16-Bit Multiprogram Computer
-- Support for kernel and user modes.
-- Support for interrupts and exceptions for segmentation violations, timeouts, IO etc (via kernel routine).
-- Support for user memory protection through virtual pages (64KB address space per process).
-- Support for preemptive multiprogramming via a hardware timer.
+- Supports kernel and user modes.
+- Supports interrupts and exceptions for segmentation violations, timeouts, IO etc (via kernel routine).
+- Supports user memory protection through virtual pages (64KB address space per process).
+- Supports preemptive multiprogramming via a hardware timer.
 
 ## Instruction Set Architecture (ISA)
 ##### Total: 57 instructions (57 of 128 opcodes reserved)
