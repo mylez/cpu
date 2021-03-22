@@ -1,7 +1,6 @@
+#### Miles Smith
+
 # 16-Bit Multiprogramming Computer
-
-### Miles Smith
-
 - Operates in kernel and user modes.
 - Support for exceptions.
 - Support for user memory protection through virtual pages.
