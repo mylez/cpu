@@ -104,6 +104,24 @@ There are 8 registers available to a user program. These are:
     r5 - Stack pointer.
     r6 - Program counter.
     r7 - Special register (imm. value / int. return value / return address)
+
+
+### Kernel / Special Registers
+There are 7 registers dedicated to kernel functions and special applications. These are:
+
+    status -  Contains the result of the last ALU operation as NZVF used for conditional 
+              branching. User-accessible.
+    timer -   Preemption timer. Decremented while in user mode. Once it reaches zero,
+              it signals a preemption exception. Protected.
+    cause -   Contains information about which interrupt or exception the kernel is 
+              servicing. Protected.
+    eaddr -   Contains the bad virtual address that triggerred an exception, if 
+              applicable. Protected.
+    eret -    Contains the value of the PC when the exception/interrupt occurred. Used 
+              in context switching. Protected.
+    context - Contains the value of the r7 when the exception/interrupt occurred. Used 
+              in context switching. Protected.
+    isr -     Contains the hardwired address of the global kernel interrupt service routine.
     
 ### Memory Segmentation
 
@@ -128,24 +146,6 @@ user processes, and extra care is required in kernel mode to use the appropriate
 instruction the segment you wish to read to or write from.
 
 ![mmio layout](https://raw.githubusercontent.com/mylez/cpu/master/doc/mmio-layout.jpeg)
-
-
-### Kernel / Special Registers
-There are 7 registers dedicated to kernel functions and special applications. These are:
-
-    status -  Contains the result of the last ALU operation as NZVF used for conditional 
-              branching. User-accessible.
-    timer -   Preemption timer. Decremented while in user mode. Once it reaches zero,
-              it signals a preemption exception. Protected.
-    cause -   Contains information about which interrupt or exception the kernel is 
-              servicing. Protected.
-    eaddr -   Contains the bad virtual address that triggerred an exception, if 
-              applicable. Protected.
-    eret -    Contains the value of the PC when the exception/interrupt occurred. Used 
-              in context switching. Protected.
-    context - Contains the value of the r7 when the exception/interrupt occurred. Used 
-              in context switching. Protected.
-    isr -     Contains the hardwired address of the global kernel interrupt service routine.
    
 ## Logisim Schematics
 #### CPU Main Circuit
