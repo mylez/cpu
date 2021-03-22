@@ -2,7 +2,7 @@
 
 # 16-Bit Multiprogram Computer
 - Support for kernel and user modes.
-- Support for exceptions.
+- Support for interrupts and exceptions for segmentation violations, timeouts, IO etc (via kernel routine).
 - Support for user memory protection through virtual pages (64KB address space per process).
 - Support for preemptive multiprogramming via a hardware timer.
 
