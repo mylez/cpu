@@ -50,7 +50,6 @@
     
     * l, s, lb, sb, li, and ats are the only mmio instructions available to user programs
     (ie unprotected). all other MMIO instructions are protected instructions.
-    
 
 ### Control Flow Instructions
 ##### (14)
