@@ -146,7 +146,7 @@ user processes, and extra care is required in kernel mode to use the appropriate
 instruction the segment you wish to read to or write from.
 
 ![mmio layout](https://raw.githubusercontent.com/mylez/cpu/master/doc/mmio-layout.jpeg)
-   
+
 ## Logisim Schematics
 #### CPU Main Circuit
 ![cpu](https://raw.githubusercontent.com/mylez/cpu/master/doc/cpu.png)
