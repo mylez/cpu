@@ -160,3 +160,4 @@ instruction the segment you wish to read to or write from.
 
 #### Control State Diagram
 ![control-fsm](https://raw.githubusercontent.com/mylez/cpu/master/doc/control-fsm.png)
+
