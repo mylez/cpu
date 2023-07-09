@@ -136,8 +136,7 @@ or when handling an exception.
 
 A benefit of this approach is that it allows for data and code to occupy separate
 address spaces. Data is byte-addressed. Code is 16 bit word-addressed (since all
-instructions are alligned 2-byte boundaries). This provides a larger address space
-(192KB in total).
+instructions are alligned 2-byte boundaries). This provides a larger code memory (192KB in total).
 
 A drawback of this approach is that kernel processes can not share memory with
 user processes, and extra care is required in kernel mode to use the appropriate 
