@@ -24,9 +24,9 @@ Processor Modes:
 
 KERN
     - set/read status register
-        - overFlow bit
-        - Cary bit
-        - Zero bi
+        - Overflow bit
+        - Carry bit
+        - Zero bit
         - Negative bit
         - Mode bit (user or kernel)
         - Vmem bit (virtual memory on or off)
